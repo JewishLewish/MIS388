@@ -10,24 +10,27 @@ import net.sourceforge.tess4j.util.LoadLibs;
 
 /**
  *
- * @author Lennard
+ * @author JewishLewish
  */
 public class Mis388 {
 
     public static void main(String[] args) {
-        // System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
 
-        File imageFile = new File("image_1.png");
+        //Setup Tesseract OCR
         ITesseract instance = new Tesseract();  // JNA Interface Mapping
-        // ITesseract instance = new Tesseract1(); // JNA Direct Mapping
         File tessDataFolder = LoadLibs.extractTessResources("tessdata"); // Maven build bundles English data
         instance.setDatapath(tessDataFolder.getPath());
+        
+        File imageFile = new File("image_2.png");
+        System.out.println(image_to_message(imageFile, instance));
+    }
 
+    public static String image_to_message(File imageFile, ITesseract instance) {
         try {
             String result = instance.doOCR(imageFile);
-            System.out.println(result);
+            return result;
         } catch (TesseractException e) {
-            System.err.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }
