@@ -20,9 +20,13 @@ public class Mis388 {
         ITesseract instance = new Tesseract();  // JNA Interface Mapping
         File tessDataFolder = LoadLibs.extractTessResources("tessdata"); // Maven build bundles English data
         instance.setDatapath(tessDataFolder.getPath());
-        instance.setTessVariable("user_defined_dpi", "600");
+        instance.setTessVariable("user_defined_dpi", "1800");
+        instance.setTessVariable("tessedit_write_images", "true");
+        //instance.setTessVariable("load_system_dawg", "0");
         
-        File imageFile = new File("Resume-1.png");
+
+        //Use TIFF NOT PNG! PNG BREAKS EVERYTHING EVEN THE SCOPE OF THE UNNIVERSE!
+        File imageFile = new File("Resume-1.tiff");
 
         System.out.println(image_to_message(imageFile, instance));
     }
