@@ -15,6 +15,8 @@ public class Mis388 {
 
         //Variables
         String targetfile = "Resume.png";
+
+        //Read Tesseract
         System.out.println(tess4j.tesseract_read(targetfile));
     }
 
