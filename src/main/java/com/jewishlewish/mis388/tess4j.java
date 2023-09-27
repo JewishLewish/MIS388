@@ -1,8 +1,11 @@
 package com.jewishlewish.mis388;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import org.apache.commons.io.IOUtils;
 
 public class tess4j {
 
@@ -27,10 +30,11 @@ public class tess4j {
             "-l", "eng",                  // ENGLISH
             "--oem", "1",                 // yes
             "--psm", "1",                 // yes
-            "-c", "tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-'" // Specify the whitelist of characters
+            "-c", "tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-@*. '", // Specify the whitelist of characters
         };
 
-        new ProcessBuilder(command);
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.start();
         //String output = IOUtils.toString(processBuilder.start().getInputStream(), StandardCharsets.UTF_8);
         return readFileToString("output.txt");
 
