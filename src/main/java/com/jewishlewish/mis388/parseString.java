@@ -2,8 +2,9 @@ package com.jewishlewish.mis388;
 
 public class parseString {
     
-    public static void convert(String input) {
+    public static String convert(String input) {
 
         //needs work.
+        return "temp solution";
     }
 }

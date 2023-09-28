@@ -14,10 +14,12 @@ public class Mis388 {
         setup.check_tesseract(); //first check if we have required folders
 
         //Variables
-        String targetfile = "Resume.png";
+        String targetfile = "example_images\\image_1.png";
 
         //Read Tesseract
-        System.out.println(tess4j.tesseract_read(targetfile));
+        String data = tess4j.tesseract_read(targetfile);
+
+        String temp = parseString.convert(data);
     }
 
 }
