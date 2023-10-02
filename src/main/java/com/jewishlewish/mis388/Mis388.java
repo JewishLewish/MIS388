@@ -4,7 +4,6 @@
 
 package com.jewishlewish.mis388;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Mis388 {
@@ -17,7 +16,9 @@ public class Mis388 {
         String targetfile = "Resume.png";
 
         //Read Tesseract
-        System.out.println(tess4j.tesseract_read(targetfile));
+        String content = tess4j.tesseract_read(targetfile);
+
+        parseString.convert(content);
     }
 
 }
