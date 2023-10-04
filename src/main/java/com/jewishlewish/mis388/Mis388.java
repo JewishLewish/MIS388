@@ -18,6 +18,7 @@ public class Mis388 {
         //Read Tesseract
         String content = tess4j.tesseract_read(targetfile);
 
+        //parseString converts String to appropriate variables
         parseString.convert(content);
     }
 
