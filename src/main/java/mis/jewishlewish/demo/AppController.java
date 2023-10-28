@@ -13,4 +13,11 @@ public class AppController {
         model.addAttribute("something","this is coming from controller");
         return "app";
     }
+
+    @GetMapping("/res")
+    String getRes(Model model) {
+    model.addAttribute("something","this is coming from controller");
+    return "res";
+    }
+
 }

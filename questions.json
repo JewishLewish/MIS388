@@ -1,6 +1,9 @@
 {
     "questions": [
-        {"question":"where are you from?", "type":"input"},
+        {
+            "question":"where are you from?", "type":"input",
+            "class":"location"
+        },
         {}
     ]
 }
