@@ -18,7 +18,7 @@ public class json {
 
             JSONArray questionsArray = (JSONArray) data.get("questions");
 
-            PythonForJava.print(questionsArray);
+            Py.print(questionsArray);
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();

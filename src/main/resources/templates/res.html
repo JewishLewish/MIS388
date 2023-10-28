@@ -11,9 +11,16 @@
 </head>
 
 <body>
-    <div class="login-card"><img class="profile-img-card" th:src="@{/img/avatar_2x.png}">
-        <p class="profile-name-card"> </p>
-        <form class="form-signin"><span class="reauth-email"> </span><input class="form-control" type="email" id="inputEmail" required="" placeholder="Email address" autofocus=""><input class="form-control" type="password" id="inputPassword" required="" placeholder="Password"><button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit">Sign in</button></form>
+    <div class="login-card">
+        <img class="profile-img-card" th:src="@{/img/avatar_2x.png}">
+            <p class="profile-name-card"> </p>
+            <form class="form-signin", method="post"><span class="reauth-email"> </span>
+            
+                <input class="form-control" type="email" id="inputEmail" name="email" required="" placeholder="Email address" autofocus="">
+            <input class="form-control" type="password" id="inputPassword" name="password" required="" placeholder="Password">
+            
+            
+            <button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit">Finish Answer Questions</button></form>
     </div>
     <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </body>
