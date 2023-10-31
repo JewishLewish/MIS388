@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html data-bs-theme="light" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -14,12 +14,11 @@
     <div class="login-card">
         <img class="profile-img-card" th:src="@{/img/avatar_2x.png}">
             <p class="profile-name-card"> </p>
-            <form class="form-signin", method="post"><span class="reauth-email"> </span>
-            
-                <input class="form-control" type="email" id="inputEmail" name="email" required="" placeholder="Email address" autofocus="">
-            <input class="form-control" type="password" id="inputPassword" name="password" required="" placeholder="Password">
-            
-            
+            <form class="form-signin", method="post">
+                <div th:each="question : ${questions}">
+                    <p th:text="${question.getQuestion()}"></p>
+                    <input class="form-control" type="text" th:name="${question.getName()}" required="" placeholder="Email address" autofocus="">
+                </div>
             <button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit">Finish Answer Questions</button></form>
     </div>
     <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
