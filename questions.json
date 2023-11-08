@@ -4,6 +4,9 @@
             "question":"where are you from?", "type":"input",
             "name":"location"
         },
-        {}
+        {
+            "question":"how many years experience in IT?", "type":"input",
+            "name":"it_experience"
+        }
     ]
 }

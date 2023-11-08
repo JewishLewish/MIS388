@@ -42,6 +42,10 @@ public class json {
         return false;
     }
 
+    public String prettyPrint() {
+        return "{'Question':'"+this.u_question+"','type':'"+this.type+"','name':'"+this.name+"'}";
+    }
+
 
     public static List<json> readJson() {
 
@@ -61,10 +65,13 @@ public class json {
                 String type = (String) questionObject.get("type");
                 String name = (String) questionObject.get("name");
                 json question = new json(u_question, type, name);
+                Py.print(question.prettyPrint());
                 if (question.notNull()) {
                     questionsList.add(question);
                 }
             }
+
+            Py.print(questionsList);
 
             return questionsList;
 
