@@ -4,6 +4,7 @@ package mis.jewishlewish.demo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,10 +74,19 @@ public class AppController {
         Py.print("First Name: " + firstName);
         Py.print("Last Name: " + lastName);
 
+        String fullName = firstName + lastName;
+
+        UUID uuid = UUID.nameUUIDFromBytes(fullName.getBytes());
+
+        String randomId = uuid.toString();
+
         Cookie Cookies_firstname = new Cookie("firstname", firstName);
         Cookie Cookies_lastname = new Cookie("lastname", lastName);
+        Cookie Cookies_uuid = new Cookie("uuid", randomId);
+
         response.addCookie(Cookies_firstname);
         response.addCookie(Cookies_lastname);
+        response.addCookie(Cookies_uuid);
 
         
         return "redirect:/res";
