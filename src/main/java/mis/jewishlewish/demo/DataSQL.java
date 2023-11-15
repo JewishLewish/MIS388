@@ -47,7 +47,25 @@ public class DataSQL {
              * user Table
              * UUID  |   firstname   | lastname
              */
-            statement.execute("INSERT INTO users VALUES ('"+uuid+"', '"+firstname+"', '"+uuid+"');");
+            statement.execute("INSERT INTO users VALUES ('"+uuid+"', '"+firstname+"', '"+lastname+"');");
+
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public static boolean add_question(String uuid, String question, String answer) {
+        try {
+            connection = connect();
+            Statement statement = connection.createStatement();
+
+            /*
+             * user Table
+             * UUID  |   firstname   | lastname
+             */
+            statement.execute("INSERT INTO resume VALUES ('"+uuid+"', '"+question+"', '"+answer+"');");
 
             statement.close();
             return true;
@@ -57,7 +75,9 @@ public class DataSQL {
     }
     
 
+    /*
     public static void main(String[] args) {
         DataSQL dataSQL = new DataSQL("database.db");
     }
+    */
 }
