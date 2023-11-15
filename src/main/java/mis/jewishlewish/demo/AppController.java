@@ -1,6 +1,7 @@
 package mis.jewishlewish.demo;
 
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +9,11 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -90,6 +93,26 @@ public class AppController {
 
         
         return "redirect:/res";
+    }
+
+    @GetMapping("/")
+    public String redirect(HttpServletRequest request) {
+        try{
+            if (WebUtils.getCookie(request, "firstname") == null) {
+                return "redirect:/login";
+            }
+
+            if (WebUtils.getCookie(request, "lastname") == null) {
+                return "redirect:/login";
+            }
+
+            if (WebUtils.getCookie(request, "uuid") == null) {
+                return "redirect:/login";
+            }
+        } catch (Exception e) {
+            return "redirect:/res";
+        }
+        return "redirect:/login";
     }
 
 }
