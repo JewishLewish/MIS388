@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DataSQL {
     private String dbfile;
-    private Connection connection;
+    private static Connection connection;
     
     public DataSQL(String dbfile) {
         this.dbfile = dbfile;
@@ -30,6 +30,24 @@ public class DataSQL {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public boolean add_user(String firstname, String lastname, String uuid) {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbfile);
+            Statement statement = connection.createStatement();
+
+            /*
+             * user Table
+             * UUID  |   firstname   | lastname
+             */
+            statement.execute("INSERT INTO users VALUES ('"+uuid+"', '"+firstname+"', '"+uuid+"');");
+
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            return false;
         }
     }
     
