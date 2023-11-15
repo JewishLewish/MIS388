@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.xml.crypto.Data;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,21 +25,24 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AppController {
 
     @GetMapping
-    String getApp(Model model, HttpServletRequest request) {
+    String getApp(HttpServletRequest request) {
 
-        /*Cookie[] cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
-                String value = cookie.getValue();
-                System.out.println("Cookie Name: " + name);
-                System.out.println("Cookie Value: " + value);
+        try{
+            if (WebUtils.getCookie(request, "firstname") == null) {
+                return "redirect:/login";
             }
-        }*/
 
-        model.addAttribute("something","this is coming from controller");
-        return "app";
+            if (WebUtils.getCookie(request, "lastname") == null) {
+                return "redirect:/login";
+            }
+
+            if (WebUtils.getCookie(request, "uuid") == null) {
+                return "redirect:/login";
+            }
+        } catch (Exception e) {
+            return "redirect:/res";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/res")
@@ -91,28 +96,9 @@ public class AppController {
         response.addCookie(Cookies_lastname);
         response.addCookie(Cookies_uuid);
 
+        DataSQL.add_user(firstName,lastName,randomId); //add data to SQL
+
         
         return "redirect:/res";
     }
-
-    @GetMapping("/")
-    public String redirect(HttpServletRequest request) {
-        try{
-            if (WebUtils.getCookie(request, "firstname") == null) {
-                return "redirect:/login";
-            }
-
-            if (WebUtils.getCookie(request, "lastname") == null) {
-                return "redirect:/login";
-            }
-
-            if (WebUtils.getCookie(request, "uuid") == null) {
-                return "redirect:/login";
-            }
-        } catch (Exception e) {
-            return "redirect:/res";
-        }
-        return "redirect:/login";
-    }
-
 }

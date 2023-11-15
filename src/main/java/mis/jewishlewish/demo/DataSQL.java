@@ -6,14 +6,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataSQL {
-    private String dbfile;
+    //consistent 
+    private static final String dbfile = "jdbc:sqlite:database.db";
+
     private static Connection connection;
     
+    
     public DataSQL(String dbfile) {
-        this.dbfile = dbfile;
-
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbfile);
+            connection = connect();
             Statement statement = connection.createStatement();
 
             statement.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER, first_name TEXT, last_name TEXT)");
@@ -33,9 +34,13 @@ public class DataSQL {
         }
     }
 
-    public boolean add_user(String firstname, String lastname, String uuid) {
+    public static Connection connect() throws SQLException {
+        return DriverManager.getConnection(dbfile);
+    }
+
+    public static boolean add_user(String firstname, String lastname, String uuid) {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbfile);
+            connection = connect();
             Statement statement = connection.createStatement();
 
             /*
