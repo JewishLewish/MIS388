@@ -62,8 +62,8 @@ public class DataSQL {
             Statement statement = connection.createStatement();
 
             /*
-             * user Table
-             * UUID  |   firstname   | lastname
+             * question Table
+             * UUID  |   question   | answer
              */
             statement.execute("INSERT INTO resume VALUES ('"+uuid+"', '"+question+"', '"+answer+"');");
 
