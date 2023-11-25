@@ -5,14 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.xml.crypto.Data;
+
 public class DataSQL {
     //consistent 
-    private static final String dbfile = "jdbc:sqlite:database.db";
+    private static final String jdbc_con = "jdbc:sqlite:";
+    private static final String dbfile = jdbc_con+json.get_db_file_name()+".db";
+
 
     private static Connection connection;
-    
-    
-    public DataSQL(String dbfile) {
+    public DataSQL() {
         try {
             connection = connect();
             Statement statement = connection.createStatement();
@@ -73,11 +75,9 @@ public class DataSQL {
             return false;
         }
     }
-    
 
-    /*
-    public static void main(String[] args) {
-        DataSQL dataSQL = new DataSQL("database.db");
+    public static void test() {
+        Py.print("DB File:  "+ dbfile);
+        DataSQL test = new DataSQL();
     }
-    */
 }

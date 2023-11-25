@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class json {
 
-    private String u_question,type,name;
+    private String u_question,type,name,db_file_name;
 
     public String getQuestion() {
         return this.u_question;
@@ -24,6 +24,21 @@ public class json {
 
     public String getName() {
         return this.name;
+    }
+
+    public static String get_db_file_name() {
+        try {
+            JSONParser parser = new JSONParser();
+
+            JSONObject data = (JSONObject) parser.parse(new FileReader("config.json"));
+
+            return (String) data.get("database_name");
+        
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return "er";
     }
 
     public json(String question, String type, String name) {
@@ -53,7 +68,7 @@ public class json {
             
             JSONParser parser = new JSONParser();
 
-            JSONObject data = (JSONObject) parser.parse(new FileReader("questions.json"));
+            JSONObject data = (JSONObject) parser.parse(new FileReader("config.json"));
 
             JSONArray questionsArray = (JSONArray) data.get("questions");
 
