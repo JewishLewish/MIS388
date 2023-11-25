@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.xml.crypto.Data;
 
 public class DataSQL {
     //consistent 
@@ -78,6 +77,6 @@ public class DataSQL {
 
     public static void test() {
         Py.print("DB File:  "+ dbfile);
-        DataSQL test = new DataSQL();
+        new DataSQL();
     }
 }

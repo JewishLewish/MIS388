@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class json {
 
-    private String u_question,type,name,db_file_name;
+    private String u_question,type,name;
 
     public String getQuestion() {
         return this.u_question;
