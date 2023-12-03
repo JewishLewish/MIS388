@@ -24,17 +24,12 @@ public class AppController {
     String getApp(HttpServletRequest request) {
 
         try{
-            if (WebUtils.getCookie(request, "firstname") == null) {
-                return "redirect:/login";
+            if (WebUtils.getCookie(request, "firstname") == null || 
+                WebUtils.getCookie(request, "lastname") == null || 
+                WebUtils.getCookie(request, "uuid") == null) {
+            return "redirect:/login";
             }
 
-            if (WebUtils.getCookie(request, "lastname") == null) {
-                return "redirect:/login";
-            }
-
-            if (WebUtils.getCookie(request, "uuid") == null) {
-                return "redirect:/login";
-            }
         } catch (Exception e) {
             return "redirect:/res";
         }
@@ -49,22 +44,39 @@ public class AppController {
     }
 
     @PostMapping("/res")
-    public String processForm(@RequestParam Map<String, String> requestParams, Model model) {
+    public String processForm(@RequestParam Map<String, String> requestParams, Model model, HttpServletRequest request) {
         
         Py.print(requestParams.toString());
 
+        Cookie[] cookies = request.getCookies();
+        String uuid_str = get_uuid(cookies);
+        if (uuid_str == null) {
+            return "redirect:/login";
+        }
+
+        List<json> questions = json.readJson();
+        int i = 0;
         HashMap<String, String> paramMap = new HashMap<>();
+        
         for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+
             String key = entry.getKey();
             String value = entry.getValue();
             paramMap.put(key, value);
-        }
-        
 
-        List<json> questions = json.readJson();
+            DataSQL.add_question(uuid_str, questions.get(i).getQuestion(), value);
+            i++;
+        }
+
+        
         model.addAttribute("questions",questions);
         
         return "res";
+    }
+
+    private String get_uuid(Cookie[] cookies) {
+        if (cookies != null) { for (Cookie cookie : cookies) { if (cookie.getName().equals("uuid")) { return (String) cookie.getValue(); } } }
+        return null;
     }
 
     @GetMapping("/login")

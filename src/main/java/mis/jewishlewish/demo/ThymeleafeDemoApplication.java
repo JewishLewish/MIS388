@@ -13,7 +13,10 @@ public class ThymeleafeDemoApplication {
 	}
 
 	public static void startup() {
-		json.readJson();
+		if (json.readJson() == null) {
+			System.exit(1);
+		};
+		new DataSQL();
 	}
 
 }
