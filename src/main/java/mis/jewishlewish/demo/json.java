@@ -35,10 +35,8 @@ public class json {
             return (String) data.get("database_name");
         
         } catch (Exception e) {
-            // TODO: handle exception
+            return "database";
         }
-
-        return "er";
     }
 
     public json(String question, String type, String name) {
