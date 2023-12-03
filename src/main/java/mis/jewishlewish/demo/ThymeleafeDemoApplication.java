@@ -14,7 +14,6 @@ public class ThymeleafeDemoApplication {
 
 	public static void startup() {
 		json.readJson();
-		DataSQL.test();
 	}
 
 }

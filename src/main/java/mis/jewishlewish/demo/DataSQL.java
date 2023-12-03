@@ -8,8 +8,7 @@ import java.sql.Statement;
 
 public class DataSQL {
     //consistent 
-    private static final String jdbc_con = "jdbc:sqlite:";
-    private static final String dbfile = jdbc_con+json.get_db_file_name()+".db";
+    private static final String dbfile = "jdbc:sqlite:"+json.get_db_file_name()+".db";
 
 
     private static Connection connection;
@@ -35,9 +34,7 @@ public class DataSQL {
         }
     }
 
-    public static Connection connect() throws SQLException {
-        return DriverManager.getConnection(dbfile);
-    }
+    public static Connection connect() throws SQLException {return DriverManager.getConnection(dbfile);}
 
     public static boolean add_user(String firstname, String lastname, String uuid) {
         try {
@@ -73,10 +70,5 @@ public class DataSQL {
         } catch (SQLException e) {
             return false;
         }
-    }
-
-    public static void test() {
-        Py.print("DB File:  "+ dbfile);
-        new DataSQL();
     }
 }
